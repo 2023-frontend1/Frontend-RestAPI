@@ -1,0 +1,40 @@
+{
+	"name": "frontend-restapi",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+		"preview": "vite preview",
+		"postinstall": "husky install",
+		"lint:fix": "eslint . --ext .js,.jsx --fix",
+		"format": "prettier --write --cache \"src/**/*.{js,jsx}\""
+	},
+	"dependencies": {
+		"@reduxjs/toolkit": "^2.0.1",
+		"axios": "^1.6.2",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-redux": "^9.0.4",
+		"react-router-dom": "^6.20.1",
+		"redux": "^5.0.0",
+		"styled-component": "^2.8.0"
+	},
+	"devDependencies": {
+		"@types/react": "^18.2.15",
+		"@types/react-dom": "^18.2.7",
+		"@typescript-eslint/parser": "^6.14.0",
+		"@vitejs/plugin-react": "^4.0.3",
+		"eslint": "^8.55.0",
+		"eslint-plugin-prettier": "^5.0.1",
+		"eslint-plugin-react": "^7.33.2",
+		"eslint-plugin-react-hooks": "^4.6.0",
+		"eslint-plugin-react-refresh": "^0.4.3",
+		"eslint-plugin-unused-imports": "^3.0.0",
+		"husky": "^8.0.3",
+		"prettier": "^3.1.1",
+		"vite": "^4.4.5"
+	}
+}
