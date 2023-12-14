@@ -5,16 +5,38 @@ import {
 	fontSize,
 	fontWeight,
 } from '../../styles/themes/@index'
-
+import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import getIssuesList from '../../apis/Issues'
+import { getIssues } from '../../slice/IssueListSlice'
 const IssueBox = () => {
+	const dispatch = useDispatch()
+	const issues = useSelector((state) => state.IssueList)
+	useEffect(() => {
+		const fetchIssueList = async () => {
+			const issueList = await getIssuesList(1, 10)
+			dispatch(getIssues(issueList))
+		}
+		fetchIssueList()
+	}, [dispatch])
 	return (
-		<S.Div_Wrapper>
-			<S.Div_IssueId>이슈 아이디</S.Div_IssueId>
-			<S.H1_Title>이슈제목</S.H1_Title>
-			<S.Div_CommentsNumber>코멘트 숫자</S.Div_CommentsNumber>
-			<S.Div_Writter>유저 닉네임</S.Div_Writter>
-			<S.Div_CreatedTime>생성일자</S.Div_CreatedTime>
-		</S.Div_Wrapper>
+		<>
+			{issues.map((issue, idx) => {
+				return (
+					<S.Div_Wrapper key={idx}>
+						<S.Div_IssueId>ID:#{issue.id}</S.Div_IssueId>
+						<S.H1_Title>{issue.title}</S.H1_Title>
+						<S.Div_CommentsNumber>
+							comments:{`${issue.comments}`}
+						</S.Div_CommentsNumber>
+						<S.Div_Writter>작성자 : {issue.user.login}</S.Div_Writter>
+						<S.Div_CreatedTime>
+							created_at :{issue.created_at}
+						</S.Div_CreatedTime>
+					</S.Div_Wrapper>
+				)
+			})}
+		</>
 	)
 }
 export default IssueBox
