@@ -9,13 +9,6 @@ function MainPage() {
 			</S.Div_HeaderWrap>
 			<S.Div_IuuseWrap>
 				<IssueBox />
-				<IssueBox />
-				<IssueBox />
-				<IssueBox />
-				<IssueBox />
-				<IssueBox />
-				<IssueBox />
-				<IssueBox />
 			</S.Div_IuuseWrap>
 			<S.Div_BtnWrap>
 				<PaginationBtn />
