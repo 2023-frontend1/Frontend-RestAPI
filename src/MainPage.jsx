@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Header, IssueBox, PaginationBtn } from './components/@index'
 import Loading from './components/Loading'
 import useIssue from './hooks/UseIssue'
+import color from './styles/themes/Color'
 import flexAlign from './styles/themes/FlexAlign'
 
 function MainPage() {
@@ -24,7 +25,7 @@ function MainPage() {
 		queryParam.set(key, value)
 		setQueryParam(queryParam)
 	}
-
+	/** 페이지 이동 함수 */
 	const onChangePageFirst = () => {
 		onChangeParam('page', 1)
 	}
@@ -40,18 +41,37 @@ function MainPage() {
 				: totPage
 		onChangeParam('page', nextPage)
 	}
-
 	const onChangePageLast = () => {
 		onChangeParam('page', totPage)
 	}
-
 	return (
 		<S.Div_AlignWrap>
 			<S.Div_HeaderWrap>
 				<Header />
 			</S.Div_HeaderWrap>
-
-			<></>
+			<span>
+				<CircleBtn
+					onClick={() => {
+						onChangeParam('sort', 'created')
+					}}
+				>
+					생성 순
+				</CircleBtn>
+				<CircleBtn
+					onClick={() => {
+						onChangeParam('sort', 'updated')
+					}}
+				>
+					업데이트 순
+				</CircleBtn>
+				<CircleBtn
+					onClick={() => {
+						onChangeParam('sort', 'comments')
+					}}
+				>
+					코멘트 순
+				</CircleBtn>
+			</span>
 
 			{isLoading ? (
 				<Loading />
@@ -117,9 +137,24 @@ const Div_BtnWrap = styled.div`
 	gap: 5px;
 `
 
+const CircleBtn = styled.button`
+	width: 15rem;
+	border: 2px solid ${color.grayScale[0]};
+	border-radius: 100rem;
+	background-color: ${color.grayScale[100]};
+	color: ${color.grayScale[0]};
+	text-align: center;
+
+	&:hover {
+		background-color: ${color.grayScale[0]};
+		color: ${color.grayScale[100]};
+	}
+`
+
 const S = {
 	Div_AlignWrap,
 	Div_HeaderWrap,
 	Div_IssueWrap,
 	Div_BtnWrap,
+	CircleBtn,
 }
