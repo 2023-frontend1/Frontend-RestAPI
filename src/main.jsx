@@ -6,10 +6,8 @@ import Store from './store/Store.js'
 import GlobalStyles from './styles/GlobalStyles.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-	
-		<Provider store={Store}>
-			<GlobalStyles />
-			<MainPage />
-		</Provider>
-	
+	<Provider store={Store}>
+		<GlobalStyles />
+		<MainPage />
+	</Provider>
 )
