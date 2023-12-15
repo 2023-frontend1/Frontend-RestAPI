@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import getIssuesList from '../apis/Issues'
 import { reload } from '../slice/IssueListSlice'
@@ -48,21 +48,24 @@ import { reload } from '../slice/IssueListSlice'
 const useIssue = (page, perPage, sort) => {
 	const dispatch = useDispatch()
 	const issues = useSelector((state) => state.IssueList)
+	const [isLoading, setIsLoading] = useState(false)
 
 	useEffect(() => {
 		const fetchNRegisterIssueList = async (page, perPage, sort) => {
+			setIsLoading(true)
 			let issueList = []
 			try {
 				issueList = await getIssuesList(page, perPage, sort)
 			} catch {
 				issueList = []
 			}
+			setIsLoading(false)
 			dispatch(reload(issueList))
 		}
 		fetchNRegisterIssueList(page, perPage, sort)
-	}, [dispatch, page, perPage, sort])
+	}, [setIsLoading, dispatch, page, perPage, sort])
 
-	return issues
+	return { issues, isLoading }
 }
 
 export default useIssue

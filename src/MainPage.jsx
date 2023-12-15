@@ -1,6 +1,7 @@
 import { useSearchParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { Header, IssueBox, PaginationBtn } from './components/@index'
+import Loading from './components/Loading'
 import useIssue from './hooks/UseIssue'
 import flexAlign from './styles/themes/FlexAlign'
 
@@ -13,7 +14,7 @@ function MainPage() {
 		sort: 'created',
 	})
 
-	const issues = useIssue(
+	const { issues, isLoading } = useIssue(
 		queryParam.get('page'),
 		queryParam.get('perPage'),
 		queryParam.get('sort')
@@ -52,20 +53,24 @@ function MainPage() {
 
 			<></>
 
-			<S.Div_IssueWrap>
-				{issues.map((issue) => {
-					return (
-						<IssueBox
-							key={issue.id}
-							id={issue.id}
-							title={issue.title}
-							numComments={issue.comments}
-							author={issue.user.id}
-							createAt={issue.created_at}
-						/>
-					)
-				})}
-			</S.Div_IssueWrap>
+			{isLoading ? (
+				<Loading />
+			) : (
+				<S.Div_IssueWrap>
+					{issues.map((issue) => {
+						return (
+							<IssueBox
+								key={issue.id}
+								id={issue.id}
+								title={issue.title}
+								numComments={issue.comments}
+								author={issue.user.id}
+								createAt={issue.created_at}
+							/>
+						)
+					})}
+				</S.Div_IssueWrap>
+			)}
 
 			<S.Div_BtnWrap>
 				<PaginationBtn text="맨 처음" onClick={onChangePageFirst} />
