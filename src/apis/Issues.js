@@ -19,7 +19,6 @@ const getIssuesList = async (page = 1, perPage = 10, sort = 'created') => {
 				},
 			}
 		)
-		console.log(response.data)
 		return response.data
 	} catch (error) {
 		console.log(error)
