@@ -59,7 +59,7 @@ const useIssue = (page, perPage, sort) => {
 			}
 			dispatch(reload(issueList))
 		}
-		fetchNRegisterIssueList()
+		fetchNRegisterIssueList(page, perPage, sort)
 	}, [dispatch, page, perPage, sort])
 
 	return issues
