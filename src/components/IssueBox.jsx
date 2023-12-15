@@ -1,24 +1,8 @@
 import styled from 'styled-components'
-import {
-	color,
-	flexAlign,
-	fontSize,
-	fontWeight,
-} from '../../styles/themes/@index'
-import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react'
-import getIssuesList from '../../apis/Issues'
-import { getIssues } from '../../slice/IssueListSlice'
+import useIssue from '../hooks/UseIssue'
+import { color, flexAlign, fontSize, fontWeight } from '../styles/themes/@index'
 const IssueBox = () => {
-	const dispatch = useDispatch()
-	const issues = useSelector((state) => state.IssueList)
-	useEffect(() => {
-		const fetchIssueList = async () => {
-			const issueList = await getIssuesList(1, 10)
-			dispatch(getIssues(issueList))
-		}
-		fetchIssueList()
-	}, [dispatch])
+	const issues = useIssue()
 	return (
 		<>
 			{issues.map((issue, idx) => {

@@ -4,10 +4,10 @@ const issueListSlice = createSlice({
 	name: 'IssueList',
 	initialState: [],
 	reducers: {
-		getIssues: (state, action) => {
+		reload: (_, action) => {
 			return action.payload
 		},
 	},
 })
-export const { getIssues } = issueListSlice.actions
+export const { reload } = issueListSlice.actions
 export default issueListSlice
