@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Header, IssueBox, PaginationBtn } from './components/@index'
-import flexAlign from '../styles/themes/FlexAlign'
+import flexAlign from './styles/themes/FlexAlign'
 function MainPage() {
 	return (
 		<S.Div_AlignWrap>

@@ -1,11 +1,6 @@
 import styled from 'styled-components'
-import useIssue from '../../hooks/UseIssue'
-import {
-	color,
-	flexAlign,
-	fontSize,
-	fontWeight,
-} from '../../styles/themes/@index'
+import useIssue from '../hooks/UseIssue'
+import { color, flexAlign, fontSize, fontWeight } from '../styles/themes/@index'
 const IssueBox = () => {
 	const issues = useIssue()
 	return (

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { fontSize, flexAlign, fontWeight } from '../../styles/themes/@index'
+import { flexAlign, fontSize, fontWeight } from '../styles/themes/@index'
 
 const PaginationBtn = () => {
 	return (

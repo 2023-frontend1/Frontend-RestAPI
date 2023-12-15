@@ -1,10 +1,5 @@
 import styled from 'styled-components'
-import {
-	color,
-	flexAlign,
-	fontSize,
-	fontWeight,
-} from '../../styles/themes/@index'
+import { color, flexAlign, fontSize, fontWeight } from '../styles/themes/@index'
 
 const Header = () => {
 	return (
