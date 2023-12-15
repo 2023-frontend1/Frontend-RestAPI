@@ -23,6 +23,7 @@ const getIssuesList = async (page = 1, perPage = 10, sort = 'created') => {
 		return response.data
 	} catch (error) {
 		console.log(error)
+		throw error
 	}
 }
 export default getIssuesList
