@@ -1,10 +1,24 @@
+import { useSearchParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { Header, IssueBox, PaginationBtn } from './components/@index'
 import useIssue from './hooks/UseIssue'
 import flexAlign from './styles/themes/FlexAlign'
 
 function MainPage() {
-	const issues = useIssue()
+	const queryKeyDefault = { page: 1, perPage: 10, sort: 'created' }
+	const [queryParam, setQueryParam] = useSearchParams(queryKeyDefault)
+
+	const onChangeParam = (key, value) => {
+		queryParam.set(key, value)
+		setQueryParam(queryParam)
+	}
+
+	const issues = useIssue(
+		queryParam.get('page'),
+		queryParam.get('perPage'),
+		queryParam.get('sort')
+	)
+
 	return (
 		<S.Div_AlignWrap>
 			<S.Div_HeaderWrap>
@@ -28,8 +42,15 @@ function MainPage() {
 
 			<S.Div_BtnWrap>
 				{new Array(10).fill(0).map((_, idx) => {
-					console.log(idx)
-					return <PaginationBtn key={idx} number={idx + 1} />
+					return (
+						<PaginationBtn
+							key={idx}
+							number={idx + 1}
+							onClick={() => {
+								onChangeParam('page', idx + 1)
+							}}
+						/>
+					)
 				})}
 			</S.Div_BtnWrap>
 		</S.Div_AlignWrap>

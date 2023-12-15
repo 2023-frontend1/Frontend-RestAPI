@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 import { color, fontSize, fontWeight } from '../styles/themes/@index'
-const PaginationBtn = ({ number }) => {
-	return <S.But_Button onClick={() => {}}>{number}</S.But_Button>
+
+const PaginationBtn = ({ number, ...rest }) => {
+	return <S.But_Button {...rest}>{number}</S.But_Button>
 }
 export default PaginationBtn
 
