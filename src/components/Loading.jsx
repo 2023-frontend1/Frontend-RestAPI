@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import color from '../styles/themes/Color'
+import { color } from '../styles/themes/@index'
 
 const Loading = () => {
 	return (
