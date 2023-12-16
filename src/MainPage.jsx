@@ -1,10 +1,9 @@
 import { useSearchParams } from 'react-router-dom'
 import styled from 'styled-components'
-import { Header, IssueBox, PaginationBtn } from './components/@index'
-import Loading from './components/Loading'
-import useIssue from './hooks/UseIssue'
+import { Header, PaginationBtn } from './components/@index'
 import color from './styles/themes/Color'
 import flexAlign from './styles/themes/FlexAlign'
+import IssuesSection from './components/IssuesSection'
 
 function MainPage() {
 	const totPage = 10
@@ -14,12 +13,6 @@ function MainPage() {
 		perPage: 10,
 		sort: 'created',
 	})
-
-	const { issues, isLoading } = useIssue(
-		queryParam.get('page'),
-		queryParam.get('perPage'),
-		queryParam.get('sort')
-	)
 
 	const onChangeParam = (key, value) => {
 		queryParam.set(key, value)
@@ -72,26 +65,11 @@ function MainPage() {
 					코멘트 순
 				</CircleBtn>
 			</span>
-
-			{isLoading ? (
-				<Loading />
-			) : (
-				<S.Div_IssueWrap>
-					{issues.map((issue) => {
-						return (
-							<IssueBox
-								key={issue.id}
-								id={issue.id}
-								title={issue.title}
-								numComments={issue.comments}
-								author={issue.user.id}
-								createAt={issue.created_at}
-							/>
-						)
-					})}
-				</S.Div_IssueWrap>
-			)}
-
+			<IssuesSection
+				page={queryParam.get('page')}
+				perPage={queryParam.get('perPage')}
+				sort={queryParam.get('sort')}
+			/>
 			<S.Div_BtnWrap>
 				<PaginationBtn text="맨 처음" onClick={onChangePageFirst} />
 				<PaginationBtn text="이전" onClick={onChangePagePrev} />
@@ -126,11 +104,6 @@ const Div_HeaderWrap = styled.div`
 	width: 100%;
 `
 
-const Div_IssueWrap = styled.div`
-	${flexAlign.justifyBetween}
-	width: 60%;
-	flex-wrap: wrap;
-`
 const Div_BtnWrap = styled.div`
 	width: 100%;
 	${flexAlign.flexCenter}
@@ -154,7 +127,6 @@ const CircleBtn = styled.button`
 const S = {
 	Div_AlignWrap,
 	Div_HeaderWrap,
-	Div_IssueWrap,
 	Div_BtnWrap,
 	CircleBtn,
 }
