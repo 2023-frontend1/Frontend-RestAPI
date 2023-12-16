@@ -1,5 +1,5 @@
 import Header from './Header'
-import IssueBox from './IssueBox'
+import IssuesSection from './IssuesSection'
 import Pagination from './Pagination'
 
-export { Header, IssueBox, Pagination }
+export { Header, IssuesSection, Pagination }

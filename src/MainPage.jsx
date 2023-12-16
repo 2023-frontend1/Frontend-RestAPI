@@ -1,7 +1,6 @@
 import { useSearchParams } from 'react-router-dom'
 import styled from 'styled-components'
-import { Header, Pagination } from './components/@index'
-import IssuesSection from './components/IssuesSection'
+import { Header, IssuesSection, Pagination } from './components/@index'
 import color from './styles/themes/Color'
 import flexAlign from './styles/themes/FlexAlign'
 
