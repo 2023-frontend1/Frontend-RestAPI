@@ -6,9 +6,8 @@ import { color, flexAlign, fontSize, fontWeight } from '../styles/themes/@index'
  * @param {Object} PageNation_Props
  * @param {Number} [PageNation_Props.numTotalPagesAtOnce=10] - 한번에 보여지는 연속된 숫자들의 갯수.
  * @param {Number} [PageNation_Props.curPage=1] - Pagination Component 에서 강조 효과가 있는 현재 page 번호. (상태를 입력)
- * @param {Number} [PageNation_Props.lastPage=10] - 마지막 페이지 번호
- * @param {String} [PageNation_Props.keyName='page'] - Pagination Component 의 각 버튼 클릭 시, 값을 변경시킬 키의 이름.
- * @param {Function} PageNation_Props.onChangePage - 첫번째 파라미터로 변경하고 싶은 key, 두번째 파라미터로 변경될 key 의 value 를 받는 상태변화 함수.
+ * @param {Number} [PageNation_Props.lastPage=10] - 마지막 페이지 번호.
+ * @param {Function} PageNation_Props.setCurPage - curPage 를 변경할 **상태변화 함수** ( ex, curPage 를 2로 변경할 경우 => curPage(2) ).
  * @returns {JSX.Element}
  *
  * @description
@@ -19,25 +18,18 @@ import { color, flexAlign, fontSize, fontWeight } from '../styles/themes/@index'
  * @example
  * <Pagination
  *   numTotalPagesAtOnce={5}
- *   curPage={1}
+ *   curPage={page}
  *   lastPage={10}
- *   keyName='page'
- *   onChangePage=
- * 		{
- * 			(page, value) =>
- * 				{setState( prev => (return {...prev, page: value}) )}
- * 		}
+ *   setCurPage={(forwardPage)=>setPage(forwardPage)}
  * />
  *
- * @author 이윤신
- * @contact 2younsin@gmail.com
+ * @author yunshin
  */
 const Pagination = ({
 	numTotalPagesAtOnce = 10,
 	curPage = 1,
 	lastPage = 10,
-	keyName = 'page',
-	onChangePage,
+	setCurPage,
 }) => {
 	if (curPage < 1) curPage = 1
 	if (curPage > lastPage) curPage = lastPage
@@ -54,41 +46,43 @@ const Pagination = ({
 	const startPage = Math.floor((curPage - 1) / numTotalPagesAtOnce) * 10
 
 	const onClickPageNumBtn = (targetPage) => {
-		onChangePage(keyName, targetPage)
+		setCurPage(targetPage)
 	}
 	const onClickGoFirstPageBtn = () => {
-		onChangePage(keyName, 1)
+		setCurPage(1)
 	}
 	const onClickGoPrevPageBtn = () => {
 		const prevPage = curPage === 1 ? 1 : curPage - 1
-		onChangePage(keyName, prevPage)
+		setCurPage(prevPage)
 	}
 	const onClickGoNextPageBtn = () => {
 		const nextPage = curPage === lastPage ? lastPage : curPage + 1
-		onChangePage(keyName, nextPage)
+		setCurPage(nextPage)
 	}
 	const onClickGoLastPageBtn = () => {
-		onChangePage(keyName, lastPage)
+		setCurPage(lastPage)
 	}
 
 	return (
 		<S.Div_Wrapper>
 			<S.But_Button onClick={onClickGoFirstPageBtn}>맨 처음</S.But_Button>
 			<S.But_Button onClick={onClickGoPrevPageBtn}>이전</S.But_Button>
-			{new Array(numTotalPagesAtOnce).fill(0).map((_, idx) => {
-				const pageNum = startPage + idx + 1
-				return (
-					<S.But_Button
-						key={idx}
-						$isActive={curPage === pageNum}
-						onClick={() => {
-							onClickPageNumBtn(pageNum)
-						}}
-					>
-						{pageNum}
-					</S.But_Button>
-				)
-			})}
+			{Array(numTotalPagesAtOnce)
+				.fill(0)
+				.map((_, idx) => {
+					const pageNum = startPage + idx + 1
+					return (
+						<S.But_Button
+							key={idx}
+							$isActive={curPage === pageNum}
+							onClick={() => {
+								onClickPageNumBtn(pageNum)
+							}}
+						>
+							{pageNum}
+						</S.But_Button>
+					)
+				})}
 			<S.But_Button onClick={onClickGoNextPageBtn}>다음</S.But_Button>
 			<S.But_Button onClick={onClickGoLastPageBtn}>맨 끝</S.But_Button>
 		</S.Div_Wrapper>

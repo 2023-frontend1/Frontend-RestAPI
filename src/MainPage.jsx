@@ -52,7 +52,9 @@ function MainPage() {
 				numTotalPagesAtOnce={10}
 				curPage={+queryParam.get('page')}
 				lastPage={20}
-				onChangePage={onChangeParam}
+				setCurPage={(forwardPage) => {
+					onChangeParam('page', forwardPage)
+				}}
 			/>
 		</S.Div_AlignWrap>
 	)
