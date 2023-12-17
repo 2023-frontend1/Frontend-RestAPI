@@ -1,9 +1,9 @@
 import styled from 'styled-components'
-import { flexAlign } from '../styles/themes/@index'
 import useIssue from '../hooks/UseIssue'
+import { flexAlign } from '../styles/themes/@index'
 import IssueBox from './IssueBox'
 const IssuesSection = ({ page, perPage, sort }) => {
-	const { issues, isLoading } = useIssue(page, perPage, sort)
+	const { issues } = useIssue(page, perPage, sort)
 	return (
 		<S.Div_IssueWrap>
 			{issues.map((issue, idx) => {
